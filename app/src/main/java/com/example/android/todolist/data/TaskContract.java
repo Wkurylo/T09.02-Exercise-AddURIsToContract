@@ -16,7 +16,10 @@
 
 package com.example.android.todolist.data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
+
+import java.net.URI;
 
 
 public class TaskContract {
@@ -29,11 +32,17 @@ public class TaskContract {
         3) Path(s) to the tasks directory
         4) Content URI for data in the TaskEntry class
       */
+    private final static String SCHEME = "content://";
+    private final static String AUTHORITY = "com.example.android.todolist";
+    private final static String BASE_CONTENT_URI = SCHEME + AUTHORITY;
+    private final static String PATH_TO_TASKS_TABLE ="tasks";
 
 
     /* TaskEntry is an inner class that defines the contents of the task table */
     public static final class TaskEntry implements BaseColumns {
 
+        private static final Uri CONTENT_URI =
+                Uri.parse(BASE_CONTENT_URI + AUTHORITY).buildUpon().appendPath(PATH_TO_TASKS_TABLE).build();
 
         // Task table and column names
         public static final String TABLE_NAME = "tasks";
